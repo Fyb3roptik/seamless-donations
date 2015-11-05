@@ -82,12 +82,12 @@ function seamless_donations_donation_form_warning_section () {
 	if( $paypal_server == "SANDBOX" ) {
 		$warning = array(
 			'id'       => 'dgx-donate-form-sandbox-warning',
-			'class'    => 'dgx-donate-form-section',
+			'class'    => 'well well-sm',
 			'elements' => array(
 				array(
 					'type'   => 'static',
-					'before' => '<p>',
-					'after'  => '</p>',
+					'before' => '<h4>',
+					'after'  => '</h4>',
 					'value'  => esc_html__ (
 						"Warning - Seamless Donations is currently configured to use the Sandbox (Test Server).",
 						'seamless-donations' ),
@@ -105,7 +105,7 @@ function seamless_donations_get_donation_section () {
 
 	$donation_section = array(
 		'id'       => 'dgx-donate-form-donation-section',
-		'class'    => 'dgx-donate-form-section',
+		'class'    => 'dgx-donate-form-section well well',
 		'elements' => array(
 			'donation_header' => array(
 				'type'   => 'static',
@@ -138,7 +138,7 @@ function seamless_donations_get_donation_section () {
 				'conceal' => 'other-donation-level',
 				'wrapper' => 'span',
 				'value'   => $giving_level,
-				'prompt'  => $formatted_amount,
+				'prompt'  => '<span class="giving_level_amount_label">' . $formatted_amount . '</span>',
 			);
 			if( $index == 0 ) {
 				$element['select'] = true;
@@ -151,11 +151,18 @@ function seamless_donations_get_donation_section () {
 		}
 	}
 
+	// Put a break in
+	$donation_section['elements']['break'] = array(
+		'type'   => 'static',
+		'after' => '<br />',
+		'wrapper' => 'span'
+	);
+
 	// add the "other" button and the text zone for "other" entry
 	$donation_section['elements']['other_radio_button'] = array(
 		'type'    => 'radio',
 		'group'   => '_dgx_donate_amount',
-		'prompt'  => esc_html__ ( 'Other', 'seamless-donations' ),
+		'prompt'  => '<span class="giving_level_amount_label">Other</span>',
 		'reveal'  => 'other-donation-level',
 		'wrapper' => 'span',
 		'value'   => 'OTHER',
@@ -166,11 +173,12 @@ function seamless_donations_get_donation_section () {
 	$donation_section['elements']['_dgx_donate_user_amount'] = array(
 		'type'       => 'text',
 		'size'       => 15,
+		'placeholder' => 'Other Amount',
 		'class'      => 'aftertext',
 		'validation' => 'currency',
 		'cloak'      => 'other-donation-level',
-		'id'         => '_dgx_donate_user_amount',
-		'before'     => esc_html__ ( 'Other: ', 'seamless-donations' ),
+		'wrapper'    => 'span',
+		'id'         => '_dgx_donate_user_amount'
 	);
 
 	// Designated Funds
@@ -283,7 +291,7 @@ function seamless_donations_get_tribute_section () {
 
 		$tribute_section = array(
 			'id'       => 'dgx-donate-form-tribute-section',
-			'class'    => 'dgx-donate-form-section',
+			'class'    => 'dgx-donate-form-section well well',
 			'elements' => array(
 				'donation_header'                => array(
 					'type'   => 'static',
@@ -309,7 +317,8 @@ function seamless_donations_get_tribute_section () {
 				'_dgx_donate_honoree_name'       => array(
 					'type'   => 'text',
 					'cloak'  => 'in-honor',
-					'size'   => 20,
+					'size'   => 40,
+					'placeholder' => 'Name of Person to be Honored',
 					'before' => esc_html__ ( 'Name of person to be honored: ', 'seamless-donations' ),
 				),
 				'_dgx_donate_honor_by_email'     => array(
@@ -336,32 +345,37 @@ function seamless_donations_get_tribute_section () {
 				'_dgx_donate_honoree_email_name' => array(
 					'type'   => 'text',
 					'cloak'  => 'in-honor email-acknowledgement',
-					'size'   => 20,
+					'size'   => 40,
+					'placeholder' => 'Email Name',
 					'before' => esc_html__ ( 'Email Name: ', 'seamless-donations' ),
 				),
 				'_dgx_donate_honoree_email'      => array(
 					'type'       => 'text',
 					'cloak'      => 'in-honor email-acknowledgement',
 					'validation' => 'email',
-					'size'       => 20,
+					'size'       => 40,
+					'placeholder' => 'Email Address',
 					'before'     => esc_html__ ( 'Email: ', 'seamless-donations' ),
 				),
 				'_dgx_donate_honoree_post_name'  => array(
 					'type'   => 'text',
 					'cloak'  => 'postal-acknowledgement',
-					'size'   => 20,
+					'size'   => 40,
+					'placeholder' => 'Name',
 					'before' => esc_html__ ( 'Name: ', 'seamless-donations' ),
 				),
 				'_dgx_donate_honoree_address'    => array(
 					'type'   => 'text',
 					'cloak'  => 'postal-acknowledgement',
-					'size'   => 20,
+					'size'   => 40,
+					'placeholder' => 'Address',
 					'before' => esc_html__ ( 'Address: ', 'seamless-donations' ),
 				),
 				'_dgx_donate_honoree_city'       => array(
 					'type'   => 'text',
 					'cloak'  => 'postal-acknowledgement',
-					'size'   => 20,
+					'size'   => 40,
+					'placeholder' => 'City',
 					'before' => esc_html__ ( 'City: ', 'seamless-donations' ),
 				),
 				'_dgx_donate_honoree_state'      => array(
@@ -392,6 +406,7 @@ function seamless_donations_get_tribute_section () {
 					'type'   => 'text',
 					'cloak'  => 'conceal-postcode',
 					'size'   => 10,
+					'placeholder' => 'Postal Code',
 					'before' => esc_html__ ( 'Postal Code: ', 'seamless-donations' ),
 				),
 
@@ -412,7 +427,7 @@ function seamless_donations_get_donor_section () {
 
 	$donor_section = array(
 		'id'       => 'dgx-donate-form-donor-section',
-		'class'    => 'dgx-donate-form-section',
+		'class'    => 'dgx-donate-form-section well well',
 		'elements' => array(
 			'donation_header'              => array(
 				'type'   => 'static',
@@ -422,20 +437,23 @@ function seamless_donations_get_donor_section () {
 			),
 			'_dgx_donate_donor_first_name' => array(
 				'type'       => 'text',
-				'size'       => 20,
+				'size'       => 40,
 				'validation' => 'required',
+				'placeholder' => 'First Name',
 				'before'     => esc_html__ ( 'First Name:', 'seamless-donations' ),
 			),
 			'_dgx_donate_donor_last_name'  => array(
 				'type'       => 'text',
-				'size'       => 20,
+				'size'       => 40,
 				'validation' => 'required',
+				'placeholder' => 'Last Name',
 				'before'     => esc_html__ ( 'Last Name:', 'seamless-donations' ),
 			),
 			'_dgx_donate_donor_email'      => array(
 				'type'       => 'text',
-				'size'       => 20,
+				'size'       => 40,
 				'validation' => 'required,email',
+				'placeholder' => 'Email Address',
 				'before'     => esc_html__ ( 'Email:', 'seamless-donations' ),
 			),
 		),
@@ -464,8 +482,9 @@ function seamless_donations_get_donor_section () {
 	if( $show_donor_telephone_field != 'false' ) {
 		$donor_section['elements']['_dgx_donate_donor_phone'] = array(
 			'type'       => 'text',
-			'size'       => 20,
+			'size'       => 40,
 			'validation' => 'required',
+			'placeholder' => 'Phone',
 			'before'     => esc_html__ ( 'Phone:', 'seamless-donations' ),
 		);
 		if( $show_donor_telephone_field == 'required' ) {
@@ -480,7 +499,8 @@ function seamless_donations_get_donor_section () {
 	if( $show_donor_employer_field != 'false' ) {
 		$donor_section['elements']['_dgx_donate_employer_name'] = array(
 			'type'   => 'text',
-			'size'   => 20,
+			'size'   => 40,
+			'placeholder' => 'Employer',
 			'before' => esc_html__ ( 'Employer:', 'seamless-donations' ),
 		);
 		if( $show_donor_employer_field == 'required' ) {
@@ -498,7 +518,8 @@ function seamless_donations_get_donor_section () {
 	if( $show_donor_occupation_field != 'false' ) {
 		$donor_section['elements']['_dgx_donate_occupation'] = array(
 			'type'   => 'text',
-			'size'   => 20,
+			'size'   => 40,
+			'placeholder' => 'Occupation',
 			'before' => esc_html__ ( 'Occupation:', 'seamless-donations' ),
 		);
 		if( $show_donor_occupation_field == 'required' ) {
@@ -546,7 +567,7 @@ function seamless_donations_get_billing_section () {
 
 	$billing_section = array(
 		'id'       => 'dgx-donate-form-billing-section',
-		'class'    => 'dgx-donate-form-section',
+		'class'    => 'dgx-donate-form-section well well',
 		'elements' => array(
 			'donation_header'            => array(
 				'type'   => 'static',
@@ -556,22 +577,25 @@ function seamless_donations_get_billing_section () {
 			),
 			'_dgx_donate_donor_address'  => array(
 				'type'       => 'text',
-				'size'       => 20,
+				'size'       => 40,
 				'validation' => 'required',
+				'placeholder' => 'Address',
 				'before'     => esc_html__ ( 'Address: ', 'seamless-donations' )
 			),
 			'_dgx_donate_donor_address2' => array(
 				'type'   => 'text',
 				'size'   => 20,
+				'placeholder' => 'Address 2',
 				'before' => esc_html__ ( 'Address 2: ', 'seamless-donations' ),
 				'after'  =>
 					"<span class='dgx-donate-comment'>" .
-					esc_html__ ( '(optional)', 'seamless-donations' ) . "</span>"
+					esc_html__ ( '&nbsp;&nbsp;(optional)', 'seamless-donations' ) . "</span>"
 			),
 			'_dgx_donate_donor_city'     => array(
 				'type'       => 'text',
-				'size'       => 20,
+				'size'       => 40,
 				'validation' => 'required',
+				'placeholder' => 'City',
 				'before'     => esc_html__ ( 'City: ', 'seamless-donations' )
 			),
 			'_dgx_donate_donor_state'    => array(
@@ -598,6 +622,7 @@ function seamless_donations_get_billing_section () {
 			'_dgx_donate_donor_zip'      => array(
 				'type'   => 'text',
 				'size'   => 10,
+				'placeholder' => 'Postal Code',
 				'before' => esc_html__ ( 'Postal Code: ', 'seamless-donations' ),
 			),
 			'dgx_donate_uk_gift_aid'     => array(
@@ -673,7 +698,7 @@ function seamless_donations_get_paypal_section () {
 
 	$paypal_hidden_section = array(
 		'id'       => 'dgx-donate-form-paypal-hidden-section',
-		'class'    => 'dgx-donate-form-section',
+		'class'    => 'dgx-donate-form-section well well',
 		'style'    => 'display:none',          // we want to hide this section from the form
 		'elements' => array(
 			'nonce'         => array(
@@ -789,18 +814,17 @@ function seamless_donations_get_submit_section () {
 
 	$submit_section = array(
 		'id'       => 'dgx-donate-form-payment-section',
-		'class'    => 'dgx-donate-form-section',
+		'class'    => 'dgx-donate-form-section well well',
 		'elements' => array(
 			'dgx-donate-pay-enabled'  => array(
-				'type'   => 'image',
-				'class'  => 'dgx-donate-pay-enabled',
-				'source' => esc_url ( $button_image_url ),
-				'value'  => esc_html__ ( 'Donate Now', 'seamless-donations' ),
+				'type'   => 'submit',
+				'button_class' => 'btn btn-success',
+				'value'  => "Donate",
 			),
 			'dgx-donate-pay-disabled' => array(
-				'type'   => 'image',
-				'class'  => 'dgx-donate-pay-disabled',
-				'source' => esc_url ( $disabled_button_image_url ),
+				'type'   => 'button',
+				'button_class' => 'btn btn-success btn-disabled',
+				'value'  => "Donate",
 			),
 			'dgx-donate-busy'         => array(
 				'type'   => 'image',

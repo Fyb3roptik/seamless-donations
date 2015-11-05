@@ -108,11 +108,11 @@ add_action ( 'wp_enqueue_scripts', 'dgx_donate_queue_scripts' ); // will eventua
 /******************************************************************************************************/
 function dgx_donate_display_thank_you () {
 
-	$output       = "<p>";
+	$output       = "<h4>";
 	$thankYouText = get_option ( 'dgx_donate_thanks_text' );
 	$thankYouText = nl2br ( $thankYouText );
 	$output .= $thankYouText;
-	$output .= "</p>";
+	$output .= "</h4>";
 
 	return $output;
 }

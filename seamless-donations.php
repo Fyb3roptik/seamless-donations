@@ -124,8 +124,13 @@ function seamless_donations_enqueue_scripts () {
 add_action ( 'wp_enqueue_scripts', 'seamless_donations_enqueue_scripts' ); // DG version of scripts
 
 function seamless_donations_queue_stylesheet () {
-
+	$bootstrap_core = plugins_url ( '/css/bootstrap.css', __FILE__ );
+	$bootstrap_theme = plugins_url ( '/css/bootstrap-theme.min.css', __FILE__ );
 	$styleurl = plugins_url ( '/css/styles.css', __FILE__ );
+	wp_register_style ( 'seamless_bootstrap_css', $bootstrap_core );
+	wp_enqueue_style ( 'seamless_bootstrap_css' );
+	wp_register_style ( 'seamless_bootstrap_theme_css', $bootstrap_theme );
+	wp_enqueue_style ( 'seamless_bootstrap_theme_css' );
 	wp_register_style ( 'seamless_donations_css', $styleurl );
 	wp_enqueue_style ( 'seamless_donations_css' );
 }
@@ -584,5 +589,3 @@ function dgx_donate_get_version () {
 
 	return $pluginVersion;
 }
-
-

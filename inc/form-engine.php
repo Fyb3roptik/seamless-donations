@@ -249,6 +249,9 @@ function seamless_donations_forms_engine_element_list ( $form_array, $form_html 
 				case 'class':
 					$element_class = trim ( $form_array[ $element_name ]['class'] );
 					break;
+				case 'button_class':
+					$element_button_class = trim( $form_array[ $element_name ]['button_class'] );
+					break;
 				case 'style':
 					$element_style = trim ( $form_array[ $element_name ]['style'] );
 					break;
@@ -362,6 +365,9 @@ function seamless_donations_forms_engine_element_list ( $form_array, $form_html 
 				}
 				if( $element_type == 'text' and $element_size != '' ) {                     // TEXT
 					$element_html .= "size='" . $element_size . "' ";                       // SIZE
+				}
+				if( ($element_type == 'submit' || $element_type == 'button') and $element_button_class != '' ) {                     // TEXT
+					$element_html .= "class='" . $element_button_class . "' ";                       // SIZE
 				}
 				if( $element_type == 'image' and $element_source != '' ) {                    // IMAGE
 					$element_html .= "src='" . $element_source . "' ";

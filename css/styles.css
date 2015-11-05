@@ -5,6 +5,11 @@ input[type="text"].seamless-donations-invalid-input {
     background-color: #ff8486;
 }
 
+#seamless-donations-form input[type="text"] { background-color: #FFF; margin: 5px 0; height: 32px; font: 400 20px/25px 'sans-serif' }
+.giving_level_amount_label { color: #000; }
+#other_radio_button { display: inline-block; margin: 15px 0; }
+#_dgx_donate_user_amount label { width: 0; margin: 0; }
+
 .seamless-donations-error-message-field {
     color: red;
     background-color: yellow;
@@ -30,26 +35,16 @@ div#designated_fund_selector select {
     max-width: 100%;
 }
 
-.dgx-donate-form-section
-{
-    border: 1px solid darkred !important;
-}
-
 /* Legacy styles pre-4.0 */
 
 #dgx-donate-container
 {
 	border: none;
-	padding: 24px;
-	margin: 0 12px 12px 12px;
-	background: #f8f8f8;
-	border-radius: 8px;
 }
 
 .dgx-donate-form-section
 {
 	border: 1px solid #eee;
-	background: #fff;
 	padding: 32px;
 	margin: 0 0 24px;
 	border-radius: 4px;
@@ -100,6 +95,8 @@ div#designated_fund_selector select {
 
 .dgx-donate-form-section select {
 	max-width: 200px;
+  background-color: #FFF;
+  margin: 5px 0;
 }
 
 .dgx-donate-form-section input.horiz
@@ -114,8 +111,11 @@ div#designated_fund_selector select {
 
 .dgx-donate-form-section label
 {
-	width: 144px;
+	width: 78px;
 	display: inline-block;
+  margin-right: 7px;
+  text-align: right;
+  color: #000;
 }
 
 .dgx-donate-form-indent
@@ -158,4 +158,3 @@ div#designated_fund_selector select {
 .dgx-donate-pay-disabled {
 	padding: 10px;
 }
-
